@@ -1,32 +1,29 @@
-/* 定义容器的大小和居中布局 */
+/* 默认样式（适用于移动设备） */
 #puzzle-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 5px;
     max-width: 90vw; /* 容器最大宽度为视口的 90% */
-    max-height: 90vw; /* 保持方形，最大高度也为视口的 90% */
+    max-height: 90vw; /* 保持方形 */
     margin: 20px auto;
 }
 
-/* 拼图块的大小，自动调整 */
 .puzzle-piece {
     width: 100%;
     height: 0;
-    padding-bottom: 100%; /* 高度设置为宽度的比例，保持方形 */
-    background-size: 300% 300%; /* 确保背景图比例与容器一致 */
+    padding-bottom: 100%; /* 方形块 */
+    background-size: 300% 300%; /* 背景图调整 */
     cursor: pointer;
     user-select: none;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* 空白块样式 */
 .puzzle-piece.empty {
     background: none;
     pointer-events: none;
     cursor: default;
 }
 
-/* 目标图样式 */
 #preview {
     max-width: 90vw; /* 目标图最大宽度为视口的 90% */
     margin: 10px auto;
@@ -34,4 +31,16 @@
     border: 2px solid #ddd;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
+}
+
+/* 针对大屏幕（如电脑）进行优化 */
+@media (min-width: 768px) {
+    #puzzle-container {
+        max-width: 500px; /* 限制拼图容器宽度为 500px */
+        max-height: 500px;
+    }
+
+    #preview {
+        max-width: 500px; /* 限制目标图宽度为 500px */
+    }
 }
