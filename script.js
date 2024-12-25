@@ -1,4 +1,4 @@
-const imagePath = './image/run.jpg'; // 替换为你的图片路径
+const imagePath = './image/run.jpg'; // 图片路径
 const container = document.getElementById('puzzle-container');
 const message = document.getElementById('message');
 
@@ -14,7 +14,7 @@ function initPuzzle() {
 
         if (pos !== 8) {
             piece.style.backgroundImage = `url(${imagePath})`;
-            piece.style.backgroundPosition = `${-(pos % 3) * 100}px ${-Math.floor(pos / 3) * 100}px`;
+            piece.style.backgroundPosition = `${-(pos % 3) * 100}% ${-Math.floor(pos / 3) * 100}%`;
             piece.dataset.correct = pos;
         } else {
             piece.classList.add('empty'); // 空白块
