@@ -1,11 +1,12 @@
-/* 默认样式（适用于移动设备） */
+/* 默认样式（移动端优先） */
 #puzzle-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 5px;
-    max-width: 90vw; /* 容器最大宽度为视口的 90% */
-    max-height: 90vw; /* 保持方形 */
     margin: 20px auto;
+    width: 90vw; /* 默认宽度：视口宽度的 90% */
+    height: 90vw; /* 方形布局 */
+    max-width: 500px; /* 最大宽度限制 */
 }
 
 .puzzle-piece {
@@ -25,22 +26,25 @@
 }
 
 #preview {
-    max-width: 90vw; /* 目标图最大宽度为视口的 90% */
     margin: 10px auto;
     display: block;
+    max-width: 90vw; /* 目标图默认宽度：视口宽度的 90% */
+    max-height: 90vw;
     border: 2px solid #ddd;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
 }
 
-/* 针对大屏幕（如电脑）进行优化 */
+/* 针对屏幕宽度更大的情况进行优化 */
 @media (min-width: 768px) {
     #puzzle-container {
-        max-width: 500px; /* 限制拼图容器宽度为 500px */
-        max-height: 500px;
+        width: 60vw; /* 宽度调整为视口宽度的 60% */
+        height: 60vw; /* 高度保持一致，保持方形布局 */
+        max-width: 800px; /* 限制最大宽度为 800px */
     }
 
     #preview {
-        max-width: 500px; /* 限制目标图宽度为 500px */
+        max-width: 60vw; /* 同步调整目标图宽度 */
+        max-height: 60vw;
     }
 }

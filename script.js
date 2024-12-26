@@ -1,6 +1,57 @@
-const imagePath = './image/run.jpg'; // 图片路径
 const container = document.getElementById('puzzle-container');
-const message = document.getElementById('message');
+const preview = document.getElementById('preview');
+const imagePath = './image/run.jpg';
+
+function adjustPuzzleSize() {
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+
+    if (screenWidth >= 768) {
+        // 电脑端
+        const size = Math.min(screenWidth * 0.6, 800); // 宽度为屏幕的 60%，最大为 800px
+        container.style.width = `${size}px`;
+        container.style.height = `${size}px`;
+        preview.style.width = `${size}px`;
+    } else {
+        // 移动端
+        const size = Math.min(screenWidth * 0.9, 500); // 宽度为屏幕的 90%，最大为 500px
+        container.style.width = `${size}px`;
+        container.style.height = `${size}px`;
+        preview.style.width = `${size}px`;
+    }
+}
+
+// 调整拼图大小
+adjustPuzzleSize();
+window.addEventListener('resize', adjustPuzzleSize); // 监听窗口调整事件
+
+// 初始化拼图逻辑
+function initPuzzle() {
+    const positions = [...Array(9).keys()]; // [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    shuffleArray(positions);
+
+    container.innerHTML = '';
+    positions.forEach((pos, index) => {
+        const piece = document.createElement('div');
+        piece.classList.add('puzzle-piece');
+        piece.dataset.index = index;
+
+        if (pos !== 8) {
+            piece.style.backgroundImage = `url(${imagePath})`;
+            piece.style.backgroundPosition = `${-(pos % 3) * 100}% ${-Math.floor(pos / 3) * 100}%`;
+            piece.dataset.correct = pos;
+        } else {
+            piece.classList.add('empty');
+            piece.dataset.correct = 8;
+        }
+
+        piece.addEventListener('click', () => movePiece(index));
+        container.appendChild(piece);
+    });
+}
+
+// 其他拼图逻辑保持不变
+
 
 function initPuzzle() {
     container.innerHTML = ''; // 清空容器
